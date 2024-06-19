@@ -93,9 +93,10 @@ public class ProdutosDAO {
 		
 		//Linha de Codigo SQL
 		String sql = " DELETE FROM produtos WHERE idProdutos = ? ";
-	
+		
 		//Metodo para preparar o Codigo SQL
 		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
 		
 		try {
 			
@@ -104,9 +105,20 @@ public class ProdutosDAO {
 			
 			//Setando o id no comando SQL; 
 			ps.setInt(1,id);
-			
 			//Codigo para executar o comando SQL.
 			ps.execute();
+			// Executa comando SQL para contagem de Registro.
+			 String updateQuery = "SET @counter = 0";
+	            	ps2 = conexao.getConexao().prepareStatement(updateQuery);
+	            	ps2.executeUpdate();
+	            	//Executa o comando SQL para fazer o update dos IDs e reaorganizar
+	            	updateQuery = "UPDATE produtos SET idProdutos = @counter := @counter + 1";
+	            	ps2 = conexao.getConexao().prepareStatement(updateQuery);
+	            	ps2.executeUpdate();
+
+	            ps2.close();
+	            ps.close();
+	            
 		}catch (SQLException e) {
 				
 			//Mensagem de erro ao Deletar Dados
@@ -159,4 +171,5 @@ public class ProdutosDAO {
 		
 		
 	}
+
 }

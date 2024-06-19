@@ -72,10 +72,11 @@ public class App {
 			//Puxa as informações do banco de Dados e lista.
 			new ProdutosDAO().ListarProdutos(produto);
 			
+			
 		break;
 		
 		case 3:
-			
+			 
 			System.out.println(menu);
 			
 			break;
@@ -114,6 +115,7 @@ public class App {
 					
 			 //condição caso não seja o Id desejado para a exclusão;	
 			}while(opcao == 2);
+			
 
 		break;
 		
